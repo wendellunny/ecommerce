@@ -13,6 +13,15 @@
 
         }
 
+        public static function checklist($list){
+            foreach ($list as &$row) {
+                $p = new Product();
+                $p -> setData($row);
+                $row = $p->getValues();
+            }
+            return $list;
+        }
+
         public function save(){
             $sql = new Sql();
             $results = $sql->select("CALL sp_products_save(:idproduct, :desproduct, :vlprice, :vlwidth, :vlheight, :vllength, :vlweight, :desurl)",array(
